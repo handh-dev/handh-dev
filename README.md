@@ -1,46 +1,53 @@
 # handh.dev
 
-Software and infrastructure for Howeth & Harp, Bubba's Fireworks, and related companies.
+technology and infrastructure for howeth and harp, bubbas fireworks, and related companies.
 
-## Architecture
+## architecture
 
 ```text
-GitHub
-   │
-   │ push
-   ▼
-GitHub Actions
+github
    │
    ▼
-AWS
-└── EC2
-    ├── Docker containers
-    │   ├── H&H Website
-    │   ├── HHQ
-    │   ├── Bubba's Website
-    │   └── BubbasHQ
+github actions
+   │
+   ▼
+aws
+└── ec2
+    ├── docker containers
+    │   ├── handh website
+    │   ├── hhq
+    │   ├── bubbas website
+    │   └── bubbashq
     │
-    └── PostgreSQL
-        └── EBS
-             ├── daily backup → local server
-             └── offsite backup → S3
+    └── postgresql
+        └── ebs
+             ├── daily backup → in-house server
+             └── offsite backup → s3
 ```
 
-## Repositories
+## repositories
 
-| Repo | Purpose |
+| repo | purpose |
 |---|---|
-| `handh-infra` | AWS, OpenTofu, Ansible, server configuration |
-| `HH-Website` | H&H public website + HHQ |
-| `bubbas-website` | Bubba's public website |
-| `bubbashq` | Bubba's operator application |
+| `handh-infra` | aws, opentofu, ansible, docker, and server configuration |
+| `handh-website` | howeth and harp public website + hhq |
+| `bubbas-website` | bubbas fireworks public website |
+| `bubbashq` | bubbas operator application |
 
-## Infrastructure
+## infrastructure
 
-- One AWS EC2 server
-- Docker Compose for application services
-- PostgreSQL hosted on EC2
-- Persistent data stored on EBS
-- Automated GitHub deployments
-- Daily database backups
-- One repo per product; frontend/backend stay together when practical
+- one aws ec2 server
+- docker compose for application services
+- postgresql hosted on ec2
+- persistent data stored on ebs
+- automated deployments through github actions
+- daily database backups to the in-house server
+- encrypted offsite backups to s3
+- one repo per product
+- frontend and backend stay together when practical
+
+## philosophy
+
+keep the system simple, cheap, portable, and automation-friendly.
+
+important business functionality should be accessible through reusable application logic and APIs rather than existing only inside user interfaces. this keeps the platform ready for future cli, mcp, and ai integrations without building unnecessary infrastructure early.
