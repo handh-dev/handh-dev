@@ -2,7 +2,7 @@
 
 technology and infrastructure for howeth and harp, bubbas fireworks, and related companies.
 
-## architecture
+## current architecture
 
 ```text
 github
@@ -15,15 +15,17 @@ aws
 └── ec2
     ├── docker containers
     │   ├── handh website
-    │   ├── hhq
-    │   ├── bubbas website
-    │   └── bubbashq
+    │   ├── hhq (within handh website)
+    │   ├── bubbashq
+    │   ├── bubbas info links
+    │   └── caddy
     │
-    └── postgresql
-        └── ebs
-             ├── daily backup → in-house server
-             └── offsite backup → s3
+    └── postgresql + app files
+        └── encrypted ebs
+             └── daily backup → encrypted s3
 ```
+
+the second backup copy to an in-house server is planned; that server is not built yet. see the [cutover status](https://github.com/handh-dev/handh-infra/blob/main/docs/cutover-status.md) for current deployment and recovery evidence.
 
 ## repositories
 
@@ -31,8 +33,10 @@ aws
 |---|---|
 | `handh-infra` | aws, opentofu, ansible, docker, and server configuration |
 | `handh-website` | howeth and harp public website + hhq |
-| `bubbas-website` | bubbas fireworks public website |
 | `bubbashq` | bubbas operator application |
+| `bubbas-info-links` | bubbas info links and sparkler signup |
+| `bubbas-website` | planned bubbas fireworks public website |
+| `handh-mail` | mail architecture and operations plan |
 
 ## infrastructure
 
@@ -41,8 +45,8 @@ aws
 - postgresql hosted on ec2
 - persistent data stored on ebs
 - automated deployments through github actions
-- daily database backups to the in-house server
 - encrypted offsite backups to s3
+- a second in-house backup destination is planned
 - one repo per product
 - frontend and backend stay together when practical
 
