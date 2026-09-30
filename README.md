@@ -59,8 +59,8 @@ the [handh-infra cargo workspace](https://github.com/handh-dev/handh-infra).
 
 application code stays with its product and framework. configuration stays in
 its native format: opentofu, compose yaml, caddy, systemd, sql, and workflow yaml.
-shell and powershell launchers may invoke rust binaries, but operational logic
-belongs in rust. see the [full standard](https://github.com/handh-dev/handh-infra/blob/main/docs/rust-standard.md).
+legacy deployment paths may be symlinks to rust binaries. custom infrastructure
+logic belongs in rust. see the [full standard](https://github.com/handh-dev/handh-infra/blob/main/docs/rust-standard.md).
 
 ## philosophy
 
