@@ -2,32 +2,29 @@
 
 technology and infrastructure for howeth and harp, bubbas fireworks, and related companies.
 
-## current architecture
+## Website delivery
 
-```text
-github
-   │
-   ▼
-local verification + release CLI
-   │
-   ▼
-aws
-└── ec2
-    ├── docker containers
-    │   ├── handh website
-    │   ├── hhq (within handh website)
-    │   ├── bubbashq
-    │   ├── bubbas info links
-    │   └── caddy
-    │
-    └── postgresql + app files
-        └── encrypted ebs
-             └── daily backup → encrypted s3
+```mermaid
+flowchart TD
+    A["Requested change"] --> B["GitHub branch and PR"]
+    B --> C["Local checks and automated review"]
+    C --> D{"Review before shipping requested?"}
+    D -->|Yes| E["Hold for owner approval"]
+    E --> F["Merge verified change"]
+    D -->|No| F
+    F --> G["Local release CLI"]
+    G --> H["Build and verify immutable image"]
+    H --> I["AWS ECR"]
+    I --> J["EC2 · Docker Compose"]
+    J --> K["Live health and revision checks"]
+    K --> L{"Healthy?"}
+    L -->|Yes| M["Release complete"]
+    L -->|No| N["Restore previous compatible image"]
 ```
 
-the second backup copy to an in-house server is planned; that server is not built yet. see the [cutover status](https://github.com/handh-dev/handh-infra/blob/main/docs/cutover-status.md) for current deployment and recovery evidence.
+Bubba Website changes ship by default after successful local verification and automated review. “Let me review it before shipping” holds the change unmerged and undeployed until explicit approval. GitHub stores source and reviews; GitHub Actions is not part of this delivery path.
 
-See [the local SDLC specification](docs/local-sdlc.md) for the one-minute Website release target, verification rules and implementation acceptance.
+The project release command is `./project release --environment production`. Other services keep their own release procedures. See the [local SDLC specification](https://github.com/handh-dev/handh-dev/blob/main/docs/local-sdlc.md) for the workflow and measured acceptance.
 
 ## repositories
 
@@ -35,9 +32,7 @@ See [the local SDLC specification](docs/local-sdlc.md) for the one-minute Websit
 |---|---|
 | `handh-infra` | rust operations/tooling, aws, opentofu, docker, and server configuration |
 | `handh-website` | howeth and harp public website + hhq |
-| `bubbashq` | bubbas operator application |
-| `bubbas-info-links` | bubbas info links and sparkler signup |
-| `bubbas-website` | planned bubbas fireworks public website |
+| `bubbas-mono` | maintained Bubba applications, including Website, Core and HQ, and their release tooling |
 | `handh-mail` | mail architecture and operations plan |
 
 ## infrastructure
@@ -46,10 +41,11 @@ See [the local SDLC specification](docs/local-sdlc.md) for the one-minute Websit
 - docker compose for application services
 - postgresql hosted on ec2
 - persistent data stored on ebs
-- local verification and explicit CLI deployments
+- local verification and project-owned CLI deployments
+- requested Bubba Website changes ship by default unless the owner explicitly holds shipping
 - encrypted offsite backups to s3
 - a second in-house backup destination is planned
-- one repo per product
+- product-owned source, including the Bubba monorepo
 - frontend and backend stay together when practical
 
 ## language standard
