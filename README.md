@@ -8,7 +8,7 @@ technology and infrastructure for howeth and harp, bubbas fireworks, and related
 github
    │
    ▼
-github actions
+local verification + release CLI
    │
    ▼
 aws
@@ -27,6 +27,8 @@ aws
 
 the second backup copy to an in-house server is planned; that server is not built yet. see the [cutover status](https://github.com/handh-dev/handh-infra/blob/main/docs/cutover-status.md) for current deployment and recovery evidence.
 
+See [the local SDLC specification](docs/local-sdlc.md) for the one-minute Website release target, verification rules and implementation acceptance.
+
 ## repositories
 
 | repo | purpose |
@@ -44,7 +46,7 @@ the second backup copy to an in-house server is planned; that server is not buil
 - docker compose for application services
 - postgresql hosted on ec2
 - persistent data stored on ebs
-- automated deployments through github actions
+- local verification and explicit CLI deployments
 - encrypted offsite backups to s3
 - a second in-house backup destination is planned
 - one repo per product
