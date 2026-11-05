@@ -2,6 +2,14 @@
 
 technology and infrastructure for howeth and harp, bubbas fireworks, and related companies.
 
+## brand
+
+give any agent the full handh.dev brand in under 1k tokens:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/handh-dev/handh-dev/main/brand/AGENTS.md
+```
+
 ## Website delivery
 
 ```mermaid

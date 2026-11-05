@@ -36,6 +36,8 @@ def check_line(line):
         tok = m.group(0)
         if tok in ALLOWED:
             continue
+        if tok == "handh" and re.match(r"-[a-z0-9]", line[m.end():m.end() + 2]):
+            continue  # lowercase repo/package slug such as handh-infra
         if tok == "handh":
             problems.append((tok, "bare 'handh': use 'handh.dev' (name) or 'handh-dev' (slug)"))
         elif "&" in tok or "+" in tok or re.search(r"(?i)\band\b", tok):
