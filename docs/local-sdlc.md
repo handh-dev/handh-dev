@@ -1,4 +1,4 @@
-# Local H&H software delivery
+# Local handh.dev software delivery
 
 Status: implemented and production-qualified on November 5, 2026.
 Tracking: https://github.com/handh-dev/handh-infra/issues/99
@@ -20,7 +20,7 @@ separately. Never hide required preparation outside the change-to-live clock.
 - handh-dev owns this shared policy and architecture description.
 - handh-infra owns generic Rust verification and administration mechanics.
 - bubbas-mono owns maintained Bubba source, application checks and its existing
-  ops/web-release adapter. Its pinned H&H interfaces remain compatible.
+  ops/web-release adapter. Its pinned handh.dev interfaces remain compatible.
 - Core retains business rules/data; Website releases must not rebuild, restart,
   migrate or modify Core, HQ, Bulk, Social, Studio or unrelated services.
 - Keep AWS, ECR, OpenTofu and Compose. Preserve URLs, permissions, real data,
