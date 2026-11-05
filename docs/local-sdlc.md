@@ -1,6 +1,6 @@
 # Local H&H software delivery
 
-Status: implementation specification, approved for autonomous implementation on November 5, 2026.
+Status: implemented and production-qualified on November 5, 2026.
 Tracking: https://github.com/handh-dev/handh-infra/issues/99
 
 ## Outcome
@@ -9,6 +9,9 @@ A routine Bubba website change should reach healthy production in approximately
 60 seconds on a prepared workstation. GitHub stores source and reviews; local
 commands own checks, artifact production and releases. No paid hosted Actions,
 new CI server, human approval gate, or per-release helper source patch is required.
+Shane clarified on November 5 that one minute is a target, not a hard limit or
+release gate. Finish functional delivery and report measured timing rather than
+extending optimization indefinitely.
 A target is not a measured result. Record cold, warm, prepared and total times
 separately. Never hide required preparation outside the change-to-live clock.
 
@@ -99,8 +102,38 @@ Completion requires:
 - reliable checks and identity-bound reusable release admission;
 - real publication, activation and compatible rollback/recovery qualification;
 - a real routine Website change measured end to end, with the 60-second target
-  either met or explicitly still open (never relabel a partial result complete);
+  either met or explicitly reported as a remaining performance improvement;
 - unchanged unrelated services/data, and task-owned disposable outputs removed.
 
 No application feature redesign, broad monorepo migration, new paid services,
 DNS/mail changes or wholesale native-platform rewrite belongs to this work.
+
+## Observed acceptance — November 5, 2026
+
+The shared policy, infrastructure verification and Bubba release adapter landed
+in handh-dev PR3, handh-infra PR100, and bubbas-mono PR156/158. Bubba PR159
+added a deployed-revision field to readiness responses for the routine benchmark.
+
+- Full local qualification passed: Rust tests/Clippy, build/types/unit tests,
+  catalog and metadata audits, browser journeys, editing/staff/owner checks,
+  unavailable-Core behavior and isolated-fixture cleanup.
+- A real Website-only release of `1ecdc56d92ac0eb5cb2cc36146cae97d5286affb`
+  completed in **141.817 seconds**: preparation 117.859s (including 16.611s
+  bootstrap), publication 3.956s, activation/readback 20.001s. This was a real
+  source change with a warm dependency/toolchain cache, not an activation-only
+  measurement. The small endpoint contract test also ran before merge.
+- The preceding full-scope rollout completed in 208.721 seconds.
+- Real rollback to the prior compatible Website completed in 18.86 seconds.
+  The final rollout restored forward progress; production is on the new source.
+- Core and 17 other containers retained their identities, images and start times.
+  `handh-email` also changed during the measurement window; this Website-only
+  workflow performed no email deployment. The initial deployment/rollback check
+  had preserved all 19 other containers.
+- Linux host and native Mac ARM64 verification passed. Windows was not qualified
+  on this workstation. Crash-recovery and drift refusal were exercised by tests;
+  no production crash injection is claimed.
+
+One minute remains an improvement target, not a hard limit. No further speed
+work is required for this delivery. Existing single-container replacement can
+briefly interrupt Website requests. Temporary task outputs are removed; signing
+configuration, the installed host helper and deployed/rollback records remain.
