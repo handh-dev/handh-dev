@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>handh.dev mood board</title>
+<meta name="description" content="Visual mood board and design reference for handh.dev. Pair with BRAND.md and tokens.json.">
+<link rel="icon" href="assets/handh-dev-brandmark.svg">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-body); font-size: var(--text-base); line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--link); text-underline-offset: 3px; }
+  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .wrap { padding: 0 32px; } }
+
+  /* header */
+  .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+  .top img { height: 28px; width: auto; }
+  .top nav { display: flex; gap: 20px; font-size: 14px; font-weight: 500; overflow-x: auto; scrollbar-width: none; }
+  .top nav a { color: var(--text-muted); text-decoration: none; white-space: nowrap; }
+  .top nav a:hover { color: var(--text); }
+  .theme-btn { font: 500 13px var(--font-mono); background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-pill); padding: 6px 12px; cursor: pointer; flex: none; }
+  .logo-dark { display: none; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo-light { display: none; } :root:not([data-theme="light"]) .logo-dark { display: block; } }
+  :root[data-theme="dark"] .logo-light { display: none; }
+  :root[data-theme="dark"] .logo-dark { display: block; }
+  @media (max-width: 860px) { .top nav { display: none; } }
+
+  /* type */
+  .eyebrow { font: 500 13px/1.2 var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); color: var(--link); margin: 0 0 12px; }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: var(--tracking-display); line-height: 1.08; margin: 0; font-weight: 700; }
+  h1 { font-size: clamp(44px, 8vw, 88px); }
+  h2 { font-size: clamp(31px, 4.4vw, 49px); margin-bottom: 16px; }
+  h3 { font-size: 20px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .blue { color: var(--brand-blue); }
+  :root[data-theme="dark"] .blue { color: var(--blue-400); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .blue { color: var(--blue-400); } }
+  .lede { font-size: 20px; line-height: 1.5; color: var(--text-muted); max-width: 60ch; margin: 16px 0 0; }
+  .muted { color: var(--text-muted); }
+  .mono { font-family: var(--font-mono); }
+  p { margin: 0 0 12px; }
+
+  section { padding: 96px 0; border-top: 1px solid var(--border); scroll-margin-top: 64px; }
+  @media (max-width: 767px) { section { padding: 64px 0; } }
+  .sec-head { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 48px; }
+  @media (min-width: 900px) { .sec-head { grid-template-columns: 5fr 7fr; align-items: end; gap: 32px; } .sec-head .lede { margin: 0; } }
+
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+  .g3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+  .g4 { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 960px) { .g4 { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 480px) { .g4.motifs { grid-template-columns: 1fr; } }
+  .g2x { grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .g2x { grid-template-columns: 1fr 1fr; } }
+  .grid > *, .spec > *, .sec-head > *, .names > *, .hero-grid > * { min-width: 0; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+  .label { font: 500 12px/1.3 var(--font-mono); letter-spacing: 0.04em; color: var(--text-muted); text-transform: uppercase; }
+
+  /* HERO */
+  .hero { padding: 64px 0 96px; }
+  .hero-grid { display: grid; gap: 8px; grid-template-columns: 1fr; margin-top: 48px; }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 7fr 5fr; } }
+  .half-l, .half-r { min-height: 340px; display: grid; place-items: center; padding: 40px; }
+  .half-l { background: var(--ink-50); border-radius: 24px 0 0 24px; border: 1px solid var(--border); }
+  .half-r { background: var(--ink-950); border-radius: 0 24px 24px 0; }
+  @media (max-width: 899px) { .half-l { border-radius: 24px 24px 0 0; } .half-r { border-radius: 0 0 24px 24px; } }
+  .half-l img { width: min(360px, 80%); }
+  .half-r img { width: min(220px, 60%); }
+
+  .words { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .chip { font: 500 13px var(--font-mono); padding: 6px 12px; border-radius: var(--radius-pill); border: 1px solid var(--border); color: var(--text); }
+  .chip.on { background: var(--blue-50); color: var(--blue-700); border-color: var(--blue-100); }
+  .chip.off { color: var(--text-muted); text-decoration: line-through; }
+
+  /* NAME */
+  .names { display: grid; gap: 8px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .names { grid-template-columns: 1fr 1fr; } }
+  .name-ok { padding: 40px 32px; background: var(--ink-950); color: #fff; border: 1px solid var(--ink-800); }
+  .name-ok:first-child { border-radius: 24px 0 0 24px; }
+  .name-ok:last-child { border-radius: 0 24px 24px 0; background: var(--ink-800); }
+  @media (max-width: 759px) { .name-ok:first-child { border-radius: 24px 24px 0 0; } .name-ok:last-child { border-radius: 0 0 24px 24px; } }
+  .name-ok .big { font: 700 clamp(40px, 7vw, 64px)/1 var(--font-display); letter-spacing: -0.03em; }
+  .name-ok .big span { color: var(--brand-blue); }
+  .name-ok .label { color: var(--ink-400); }
+  .name-ok p { color: var(--ink-300); margin-top: 16px; font-size: 15px; }
+  .tick { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--success); color: #fff; font-size: 13px; margin-right: 8px; vertical-align: 2px; }
+  .never { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .never .x { font: 600 15px var(--font-mono); padding: 8px 14px; border-radius: var(--radius-sm); background: color-mix(in srgb, var(--danger) 9%, transparent); color: var(--danger); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .rule-strip { margin-top: 16px; padding: 20px 24px; border-left: 3px solid var(--brand-blue); background: var(--bg-subtle); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+
+  /* MOOD TILES */
+  .mood { display: grid; gap: 8px; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  @media (min-width: 900px) { .mood { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; } }
+  .tile { position: relative; overflow: hidden; border-radius: var(--radius-lg); padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .tile .label { position: relative; z-index: 1; }
+  .t-wide { grid-column: span 2; }
+  .t-tall { grid-row: span 2; }
+  .t-blueprint { background-color: var(--ink-950); background-image: linear-gradient(rgba(74,147,255,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(74,147,255,.16) 1px, transparent 1px), linear-gradient(rgba(74,147,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(74,147,255,.07) 1px, transparent 1px); background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px; }
+  .t-blueprint .label { color: var(--blue-300); }
+  .t-blueprint svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .t-term { background: var(--ink-900); font: 13px/1.7 var(--font-mono); color: var(--ink-300); justify-content: flex-start; }
+  .t-term .k { color: var(--blue-400); } .t-term .s { color: #f6f7f9; } .t-term .c { color: var(--ink-500); }
+  .t-term .dots { display: flex; gap: 6px; margin-bottom: 14px; } .t-term .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-700); }
+  .t-term .label { margin-top: auto; color: var(--ink-400); }
+  .t-cut { background: var(--ink-50); border: 1px solid var(--border); justify-content: flex-start; }
+  .t-cut::before { content: ""; position: absolute; inset: 0; background: var(--brand-blue); clip-path: polygon(78% 0, 100% 0, 100% 100%, 42% 100%); }
+  .t-cut .label { color: var(--text-muted); }
+  .t-seam { background: transparent; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .t-seam div:first-child { background: var(--ink-800); border-radius: 24px 0 0 24px; }
+  .t-seam div:last-child { background: var(--brand-blue); border-radius: 0 24px 24px 0; display: flex; align-items: flex-end; padding: 16px; }
+  .t-seam .label { color: #fff; }
+  .t-swiss { background: #fff; border: 1px solid var(--ink-200); color: var(--ink-800); justify-content: space-between; }
+  .t-swiss .n { font: 700 72px/0.9 var(--font-display); letter-spacing: -0.04em; }
+  .t-swiss .n span { color: var(--brand-blue); }
+  .t-swiss .label { color: var(--ink-500); }
+  .t-machined { background: radial-gradient(120% 90% at 30% 20%, #3a4552 0%, #1d252f 55%, #0b0f14 100%); }
+  .t-machined::before { content: ""; position: absolute; left: 18%; top: 20%; width: 34%; height: 60%; border-radius: 28px 0 0 28px; background: linear-gradient(180deg, #2a3440, #141a22); box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+  .t-machined::after { content: ""; position: absolute; left: calc(18% + 34% + 6px); top: 20%; width: 28%; height: 60%; border-radius: 0 28px 28px 0; background: var(--brand-blue); }
+  .t-machined .label { color: var(--ink-400); }
+  .t-doc { background: var(--surface); border: 1px solid var(--border); justify-content: flex-start; gap: 8px; }
+  .t-doc .bar { height: 8px; border-radius: 4px; background: var(--ink-200); }
+  .t-doc .bar.h { height: 14px; width: 60%; background: var(--text); }
+  .t-doc .bar.b { width: 30%; background: var(--brand-blue); }
+  .t-doc .label { margin-top: auto; }
+  .t-stem { background: var(--bg-subtle); border: 1px solid var(--border); justify-content: center; padding-left: 28px; }
+  .t-stem::before { content: ""; position: absolute; left: 16px; top: 24px; bottom: 24px; width: 4px; border-radius: 2px; background: var(--brand-blue); }
+  .t-stem q { font: 600 20px/1.3 var(--font-display); letter-spacing: -0.01em; quotes: none; }
+  .t-stem .label { margin-top: 12px; }
+
+  /* COLOR */
+  .swatches { display: grid; gap: 8px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .swatches { grid-template-columns: 3fr 3fr 2fr 2fr; } }
+  .sw { border-radius: var(--radius-lg); padding: 20px; min-height: 220px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid transparent; }
+  .sw .nm { font: 700 25px/1.1 var(--font-display); letter-spacing: -0.02em; }
+  .sw .hex { font: 500 14px var(--font-mono); opacity: .9; }
+  .sw small { display: block; font-size: 13px; opacity: .8; margin-top: 4px; line-height: 1.4; }
+  .scale { display: grid; grid-template-columns: repeat(11, 1fr); margin-top: 16px; border-radius: var(--radius-md); overflow: hidden; }
+  .scale div { height: 64px; display: flex; align-items: flex-end; padding: 6px; font: 500 10px var(--font-mono); }
+  .scale-label { display: flex; justify-content: space-between; margin-top: 24px; }
+  .ratio { display: flex; height: 48px; border-radius: var(--radius-md); overflow: hidden; margin-top: 8px; border: 1px solid var(--border); }
+  .ratio div { display: flex; align-items: center; padding: 0 12px; font: 500 12px var(--font-mono); white-space: nowrap; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  th { font: 500 12px var(--font-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  .pair { display: inline-flex; align-items: center; justify-content: center; min-width: 64px; height: 32px; padding: 0 10px; border-radius: var(--radius-sm); font-weight: 600; border: 1px solid var(--border); }
+  .ok { color: var(--success); font-weight: 600; } .warn { color: var(--warning); font-weight: 600; } .bad { color: var(--danger); font-weight: 600; }
+  .table-wrap { overflow-x: auto; }
+
+  /* TYPE */
+  .spec { padding: 32px 0; border-bottom: 1px solid var(--border); display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 860px) { .spec { grid-template-columns: 220px 1fr; } }
+  .spec:last-child { border-bottom: 0; }
+  .specimen-display { font: 700 clamp(40px, 6.5vw, 76px)/1.02 var(--font-display); letter-spacing: -0.03em; }
+  .specimen-body { font-size: 20px; line-height: 1.55; max-width: 60ch; }
+  .specimen-mono { font: 400 16px/1.7 var(--font-mono); }
+  .scale-row { display: flex; align-items: baseline; gap: 16px; padding: 6px 0; border-bottom: 1px dashed var(--border); overflow: hidden; white-space: nowrap; }
+  .scale-row span:first-child { width: 48px; flex: none; font: 500 12px var(--font-mono); color: var(--text-muted); }
+  .scale-row span:last-child { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em; }
+
+  /* MOTIFS */
+  .motif { padding: 0; overflow: hidden; }
+  .motif .art { height: 200px; position: relative; background: var(--bg-subtle); border-bottom: 1px solid var(--border); }
+  .motif .txt { padding: 20px 24px 24px; }
+  .art-corners { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 32px; }
+  .art-corners div:first-child { background: var(--ink-800); border-radius: 28px 0 0 28px; }
+  .art-corners div:last-child { background: var(--brand-blue); border-radius: 0 28px 28px 0; }
+  .art-seam { display: flex; gap: 6px; padding: 32px; }
+  .art-seam div { flex: 1; background: var(--ink-800); border-radius: 4px; }
+  .art-seam div:nth-child(2) { background: var(--ink-600); }
+  .art-seam div:nth-child(3) { background: var(--brand-blue); }
+  .art-cut::before { content: ""; position: absolute; inset: 32px; background: var(--ink-800); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); border-radius: 0 0 0 0; }
+  .art-cut::after { content: ""; position: absolute; top: 32px; bottom: 32px; left: 50%; width: 45%; background: var(--brand-blue); clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%); }
+  .art-cut .deg { position: absolute; right: 12px; top: 8px; font: 500 12px var(--font-mono); color: var(--text-muted); z-index: 1; }
+  .art-stem { padding: 32px 32px 32px 48px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .art-stem::before { content: ""; position: absolute; left: 32px; top: 32px; bottom: 32px; width: 4px; background: var(--brand-blue); border-radius: 2px; }
+  .art-stem i { display: block; height: 10px; border-radius: 5px; background: var(--ink-300); }
+  .art-stem i:first-child { height: 16px; width: 70%; background: var(--text); }
+  .art-stem i:nth-child(3) { width: 80%; }
+
+  /* COMPONENTS */
+  .btn { display: inline-flex; align-items: center; gap: 8px; font: 600 15px var(--font-body); padding: 12px 20px; border-radius: var(--radius-md); border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out); }
+  .btn:focus-visible { outline: none; box-shadow: var(--shadow-focus); }
+  .btn-primary { background: var(--action); color: var(--on-action); }
+  .btn-primary:hover { background: var(--action-hover); }
+  .btn-secondary { background: transparent; color: var(--text); border-color: var(--border); }
+  .btn-secondary:hover { border-color: var(--text-muted); }
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .tag { font: 500 12px var(--font-mono); padding: 4px 10px; border-radius: var(--radius-pill); background: var(--blue-50); color: var(--blue-700); }
+  .tag.o { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+  .input { width: 100%; font: 400 15px var(--font-body); padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); color: var(--text); }
+  .input:focus { outline: none; border-color: var(--brand-blue); box-shadow: var(--shadow-focus); }
+  .code { background: var(--code-bg); border-radius: var(--radius-md); padding: 16px 20px; font: 400 14px/1.7 var(--font-mono); overflow-x: auto; white-space: pre; }
+  .code .k { color: var(--link); font-weight: 500; } .code .c { color: var(--text-muted); }
+  .callout { border-left: 3px solid var(--brand-blue); background: var(--blue-50); color: var(--ink-800); padding: 16px 20px; border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 15px; }
+  :root[data-theme="dark"] .callout { background: var(--ink-900); color: var(--ink-50); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .callout { background: var(--ink-900); color: var(--ink-50); } }
+  .mini-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); flex-wrap: wrap; }
+  .mini-nav img { height: 22px; width: auto; }
+  .mini-nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; font: 500 14px var(--font-body); }
+  .mini-nav li { color: var(--text-muted); padding-bottom: 4px; }
+  .mini-nav li.active { color: var(--text); box-shadow: inset 0 -2px 0 var(--brand-blue); }
+
+  /* APPLICATIONS */
+  .og { aspect-ratio: 1200 / 630; background: var(--ink-950); border: 1px solid var(--ink-800); border-radius: var(--radius-lg); position: relative; overflow: hidden; color: #fff; padding: 6%; display: flex; flex-direction: column; justify-content: space-between; }
+  .og::after { content: ""; position: absolute; top: 0; bottom: 0; right: -8%; width: 30%; background: var(--brand-blue); clip-path: polygon(48% 0, 100% 0, 100% 100%, 0 100%); }
+  .og img { width: 9%; min-width: 32px; position: relative; z-index: 1; }
+  .og .h { font: 700 clamp(20px, 3.4vw, 40px)/1.05 var(--font-display); letter-spacing: -0.03em; max-width: 62%; position: relative; z-index: 1; }
+  .og .h span { color: var(--blue-400); }
+  .og .u { font: 500 clamp(11px, 1.2vw, 14px) var(--font-mono); color: var(--ink-400); position: relative; z-index: 1; }
+  .bc { aspect-ratio: 3.5 / 2; border-radius: 12px; display: grid; place-items: center; position: relative; overflow: hidden; }
+  .bc.front { background: var(--ink-800); }
+  .bc.front img { width: 42%; }
+  .bc.back { background: #fff; border: 1px solid var(--ink-200); color: var(--ink-800); place-items: stretch; padding: 8% 9%; display: flex; flex-direction: column; justify-content: space-between; }
+  .bc.back .nm { font: 700 clamp(16px, 2vw, 22px)/1.1 var(--font-display); letter-spacing: -0.02em; }
+  .bc.back .rl { font-size: 13px; color: var(--ink-500); }
+  .bc.back .ln { font: 500 12px/1.7 var(--font-mono); color: var(--ink-500); }
+  .bc.back .ln b { color: var(--blue-600); font-weight: 500; }
+  .bc.back::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 6px; background: var(--brand-blue); }
+  .icons { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+  .ic { border-radius: 22%; display: grid; place-items: center; border: 1px solid var(--border); }
+  .ic img { width: 58%; }
+  .ic.lg { width: 112px; height: 112px; background: #fff; }
+  .ic.md { width: 72px; height: 72px; background: var(--ink-800); border-color: var(--ink-800); }
+  .ic.sm { width: 40px; height: 40px; background: #fff; }
+  .ic.xs { width: 20px; height: 20px; border: 0; background: transparent; } .ic.xs img { width: 100%; }
+  .slide { aspect-ratio: 16 / 9; border-radius: var(--radius-lg); background: var(--ink-950); border: 1px solid var(--ink-800); position: relative; overflow: hidden; padding: 6%; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; }
+  .slide::before { content: ""; position: absolute; inset: 0 0 0 55%; background: var(--brand-blue); clip-path: polygon(45% 0, 100% 0, 100% 100%, 0 100%); }
+  .slide .n { position: absolute; top: 6%; left: 6%; font: 500 13px var(--font-mono); color: var(--ink-400); }
+  .slide .t { font: 700 clamp(22px, 3.2vw, 40px)/1.05 var(--font-display); letter-spacing: -0.03em; position: relative; max-width: 55%; }
+  .slide .e { font: 500 12px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--blue-400); margin-bottom: 8px; position: relative; }
+
+  /* LOGO DO / DON'T */
+  .lg-cell { border-radius: var(--radius-lg); height: 180px; display: grid; place-items: center; position: relative; overflow: hidden; border: 1px solid var(--border); }
+  .lg-cell img { width: 46%; }
+  .lg-cap { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; font-size: 14px; }
+  .lg-cap b { flex: none; width: 20px; height: 20px; border-radius: 50%; display: inline-grid; place-items: center; color: #fff; font-size: 12px; }
+  .lg-cap b.y { background: var(--success); } .lg-cap b.n { background: var(--danger); }
+  .busy { background: repeating-linear-gradient(45deg, #ff7a59 0 14px, #ffd166 14px 28px, #06d6a0 28px 42px); }
+  .cleargrid { position: relative; padding: 25%; border: 1px dashed var(--blue-300); }
+
+  /* VOICE */
+  .say { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .say > div { padding: 20px 24px; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .say > div:nth-child(odd) { border-right: 1px solid var(--border); }
+  .say .hd { font: 500 12px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; background: var(--bg-subtle); }
+  .say > div:nth-last-child(-n+2) { border-bottom: 0; }
+  .say .no { color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--danger); }
+  @media (max-width: 600px) { .say { grid-template-columns: 1fr; } .say > div:nth-child(odd) { border-right: 0; } .say > div:nth-last-child(2) { border-bottom: 1px solid var(--border); } }
+
+  /* FILES */
+  .files li { margin-bottom: 8px; }
+  .files code, p code, td code { font: 500 13px var(--font-mono); background: var(--code-bg); padding: 2px 6px; border-radius: 4px; }
+  footer { padding: 48px 0 64px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  footer img { height: 28px; }
+
+  /* entrance: the join */
+  @media (prefers-reduced-motion: no-preference) {
+    .half-l { animation: joinL var(--dur-slow) var(--ease-out) both; }
+    .half-r { animation: joinR var(--dur-slow) var(--ease-out) both; }
+    @keyframes joinL { from { transform: translateX(-24px); opacity: 0; } }
+    @keyframes joinR { from { transform: translateX(24px); opacity: 0; } }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="#top" aria-label="handh.dev mood board, top"><img class="logo-light" src="assets/handh-dev-brandmark.svg" alt="handh.dev"><img class="logo-dark" src="assets/handh-dev-brandmark-reversed.svg" alt="handh.dev"></a>
+    <nav aria-label="Sections">
+      <a href="#name">Name</a><a href="#mood">Mood</a><a href="#color">Color</a><a href="#type">Type</a><a href="#shape">Shape</a><a href="#ui">UI</a><a href="#apply">Applications</a><a href="#logo">Logo</a><a href="#voice">Voice</a><a href="#files">Files</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light and dark theme">theme: auto</button>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow">// brand mood board · v1.0</p>
+      <h1>Two halves. <span class="blue">One</span> build.</h1>
+      <p class="lede">The visual and verbal reference for handh.dev. Hand this page, <code class="mono">BRAND.md</code> and <code class="mono">tokens.json</code> to any designer or agent, and what comes back should look like it came from one studio.</p>
+      <div class="hero-grid">
+        <div class="half-l"><img src="assets/handh-dev-full.svg" alt="handh.dev full logo on light background"></div>
+        <div class="half-r"><img src="assets/handh-dev-brandmark-reversed.svg" alt="handh.dev brandmark on dark background"></div>
+      </div>
+      <div class="words" aria-label="Mood words">
+        <span class="chip on">precise</span><span class="chip on">engineered</span><span class="chip on">calm</span><span class="chip on">confident</span><span class="chip on">direct</span><span class="chip on">crafted</span><span class="chip on">modern</span><span class="chip on">trustworthy</span>
+        <span class="chip off">playful</span><span class="chip off">loud</span><span class="chip off">corporate</span><span class="chip off">neon</span><span class="chip off">luxury</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAME -->
+  <section id="name">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">01 / name</p><h2>Two spellings. That's all.</h2></div>
+        <p class="lede">Always lowercase. The <span class="mono">.dev</span> is part of the name. No initials, no nicknames, and never the ampersand character, anywhere.</p>
+      </div>
+      <div class="names">
+        <div class="name-ok">
+          <div class="label"><span class="tick">✓</span>display name</div>
+          <div class="big" style="margin-top:20px">handh<span>.dev</span></div>
+          <p>Headlines, body copy, page titles, alt text, bios, signatures, legal lines.</p>
+        </div>
+        <div class="name-ok">
+          <div class="label"><span class="tick">✓</span>slug</div>
+          <div class="big" style="margin-top:20px">handh-dev</div>
+          <p>Repos, packages, file names, code identifiers, URL paths, handles where a dot isn't allowed.</p>
+        </div>
+      </div>
+      <!-- brand-lint: ignore-start -->
+      <div class="never" aria-label="Forbidden spellings">
+        <span class="label" style="margin-right:4px">never:</span>
+        <span class="x">H&amp;H</span><span class="x">H &amp; H</span><span class="x">H and H</span><span class="x">H+H</span><span class="x">HandH</span><span class="x">Handh.dev</span><span class="x">HANDH.DEV</span><span class="x">handh</span><span class="x">handh dev</span><span class="x">handhdev</span><span class="x">handh_dev</span><span class="x">HH</span>
+      </div>
+      <!-- brand-lint: ignore-end -->
+      <div class="rule-strip"><strong>Ampersand ban:</strong> write "design and build", never the symbol. Applies to all visible brand text: headlines, nav, buttons, alt text, metadata, file names. Check with <code>python3 brand/check-brand-name.py &lt;path&gt;</code>.</div>
+    </div>
+  </section>
+
+  <!-- MOOD -->
+  <section id="mood">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">02 / mood</p><h2>Engineered calm.</h2></div>
+        <p class="lede">Blueprints, terminals, machined parts, Swiss grids, well-set documentation. Mostly quiet neutrals, one sharp blue moment.</p>
+      </div>
+      <div class="mood">
+        <div class="tile t-blueprint t-wide t-tall">
+          <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g fill="none" stroke="#4a93ff" stroke-width="1.5">
+              <path d="M110 90 h70 v220 h-70 a40 40 0 0 1 -40 -40 v-140 a40 40 0 0 1 40 -40z"/>
+              <path d="M240 90 h60 a40 40 0 0 1 40 40 v140 a40 40 0 0 1 -40 40 h-60 v-80 a30 30 0 0 0 -30 -30 h-24 v-50 h24 a30 30 0 0 1 30 -30z" opacity=".55"/>
+              <path d="M250 175 l58 120" stroke="#0073fe" stroke-width="2.5"/>
+              <path d="M70 340 h270 M70 334 v12 M340 334 v12" opacity=".6"/>
+              <path d="M188 70 v20 M232 70 v20 M188 76 h44" opacity=".6"/>
+            </g>
+            <g font-family="JetBrains Mono, monospace" font-size="10" fill="#82b5ff">
+              <text x="190" y="66">seam</text><text x="186" y="356">1 : 1</text><text x="318" y="300">64°</text>
+            </g>
+          </svg>
+          <span class="label">blueprint precision</span>
+        </div>
+        <div class="tile t-term">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div><span class="c"># ship it</span></div>
+          <div><span class="k">$</span> <span class="s">git push</span> origin main</div>
+          <div><span class="k">✓</span> deployed in 41s</div>
+          <span class="label">a clean terminal</span>
+        </div>
+        <div class="tile t-cut"><span class="label">the 64° cut</span></div>
+        <div class="tile t-seam"><div></div><div><span class="label">two halves, one seam</span></div></div>
+        <div class="tile t-swiss"><div class="n">01<span>.</span></div><span class="label">swiss grid, numbered steps</span></div>
+        <div class="tile t-machined t-wide"><span class="label">machined, tactile, exact</span></div>
+        <div class="tile t-doc"><div class="bar h"></div><div class="bar"></div><div class="bar" style="width:88%"></div><div class="bar b"></div><div class="bar" style="width:70%"></div><span class="label">set like good docs</span></div>
+        <div class="tile t-stem"><q>Built right. Built to last.</q><span class="label">the stem</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section id="color">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">03 / color</p><h2>Ink, blue, and a lot of air.</h2></div>
+        <p class="lede">Two brand colors lifted straight from the logo. Blue is a signal: one focal moment per view. Small blue text uses the darker action blue so it stays readable.</p>
+      </div>
+      <div class="swatches">
+        <div class="sw" style="background:#1d252f;color:#fff"><div><div class="nm">Ink</div><small>Logo charcoal. Text, dark surfaces.</small></div><div class="hex">#1D252F · ink-800</div></div>
+        <div class="sw" style="background:#0073fe;color:#fff"><div><div class="nm">Blue</div><small>Logo blue. Large type, graphics, focus.</small></div><div class="hex">#0073FE · blue-500</div></div>
+        <div class="sw" style="background:#005fd6;color:#fff"><div><div class="nm">Action</div><small>Buttons, links, small blue text.</small></div><div class="hex">#005FD6 · blue-600</div></div>
+        <div class="sw" style="background:#f6f7f9;color:#1d252f;border-color:#d8dce3"><div><div class="nm">Paper</div><small>White and ink-50 grounds.</small></div><div class="hex">#FFFFFF · #F6F7F9</div></div>
+      </div>
+
+      <div class="scale-label"><span class="label">blue scale 50 → 950</span></div>
+      <div class="scale" aria-label="Blue scale">
+        <div style="background:#eef5ff;color:#1d252f">50</div><div style="background:#d9e8ff;color:#1d252f">100</div><div style="background:#b5d3ff;color:#1d252f">200</div><div style="background:#82b5ff;color:#1d252f">300</div><div style="background:#4a93ff;color:#0b0f14">400</div><div style="background:#0073fe;color:#fff">500</div><div style="background:#005fd6;color:#fff">600</div><div style="background:#004cad;color:#fff">700</div><div style="background:#003b87;color:#fff">800</div><div style="background:#002a61;color:#fff">900</div><div style="background:#001a3d;color:#fff">950</div>
+      </div>
+      <div class="scale-label"><span class="label">ink scale 50 → 950</span></div>
+      <div class="scale" aria-label="Ink scale">
+        <div style="background:#f6f7f9;color:#1d252f">50</div><div style="background:#eceef2;color:#1d252f">100</div><div style="background:#d8dce3;color:#1d252f">200</div><div style="background:#b6bdc8;color:#1d252f">300</div><div style="background:#8a94a3;color:#0b0f14">400</div><div style="background:#5f6a7a;color:#fff">500</div><div style="background:#434d5b;color:#fff">600</div><div style="background:#313a46;color:#fff">700</div><div style="background:#1d252f;color:#fff">800</div><div style="background:#141a22;color:#fff">900</div><div style="background:#0b0f14;color:#fff">950</div>
+      </div>
+
+      <div class="scale-label"><span class="label">color budget by area</span></div>
+      <div class="ratio">
+        <div style="flex:75;background:#f6f7f9;color:#5f6a7a">75% neutral</div>
+        <div style="flex:15;background:#1d252f;color:#fff">15% ink</div>
+        <div style="flex:10;background:#0073fe;color:#fff">10%</div>
+      </div>
+
+      <div class="card table-wrap" style="margin-top:32px;padding:8px 8px 0">
+        <table>
+          <thead><tr><th>Pair</th><th>Ratio</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pair" style="background:#fff;color:#1d252f">Aa</span> ink on white</td><td class="mono">15.46</td><td class="ok">Body text</td></tr>
+            <tr><td><span class="pair" style="background:#fff;color:#5f6a7a">Aa</span> ink-500 on white</td><td class="mono">5.48</td><td class="ok">Muted text</td></tr>
+            <tr><td><span class="pair" style="background:#fff;color:#005fd6">Aa</span> blue-600 on white</td><td class="mono">5.82</td><td class="ok">Links, small blue text</td></tr>
+            <tr><td><span class="pair" style="background:#005fd6;color:#fff">Aa</span> white on blue-600</td><td class="mono">5.82</td><td class="ok">Button labels</td></tr>
+            <tr><td><span class="pair" style="background:#fff;color:#0073fe">Aa</span> blue-500 on white</td><td class="mono">4.30</td><td class="warn">Large text (24px+) and graphics only</td></tr>
+            <tr><td><span class="pair" style="background:#0b0f14;color:#4a93ff">Aa</span> blue-400 on ink-950</td><td class="mono">6.32</td><td class="ok">Dark-mode links</td></tr>
+            <tr><td><span class="pair" style="background:#141a22;color:#8a94a3">Aa</span> ink-400 on ink-900</td><td class="mono">5.70</td><td class="ok">Dark-mode muted text</td></tr>
+            <tr><td><span class="pair" style="background:#1d252f;color:#0073fe">Aa</span> blue-500 on ink</td><td class="mono">3.60</td><td class="bad">Avoid: muddy</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section id="type">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">04 / type</p><h2>Geometric headlines, quiet text.</h2></div>
+        <p class="lede">Lexend echoes the wordmark. Inter carries the reading. JetBrains Mono marks labels, eyebrows and code. Sentence case everywhere.</p>
+      </div>
+      <div class="spec">
+        <div><div class="label">display · Lexend 700</div><p class="muted" style="font-size:14px;margin-top:8px">Tracking -0.025em. One blue word allowed, large sizes only.</p></div>
+        <div class="specimen-display">From first sketch to <span class="blue">shipped</span>.</div>
+      </div>
+      <div class="spec">
+        <div><div class="label">body · Inter 400 / 600</div><p class="muted" style="font-size:14px;margin-top:8px">16 to 20px, line height 1.6, max 68ch.</p></div>
+        <p class="specimen-body">We design and build software that does what it says. Clear plans, honest timelines and code your team can keep running long after launch. <strong>No fluff, no surprises.</strong></p>
+      </div>
+      <div class="spec">
+        <div><div class="label">mono · JetBrains Mono</div><p class="muted" style="font-size:14px;margin-top:8px">Eyebrows, labels, data, code.</p></div>
+        <div class="specimen-mono"><span class="eyebrow" style="display:block">// 02 / process</span>const brand = { name: "handh.dev", slug: "handh-dev" };</div>
+      </div>
+      <div class="spec">
+        <div><div class="label">scale · ratio 1.25</div></div>
+        <div>
+          <div class="scale-row"><span>76</span><span style="font-size:76px;line-height:1">Built right</span></div>
+          <div class="scale-row"><span>61</span><span style="font-size:61px;line-height:1">Built right</span></div>
+          <div class="scale-row"><span>49</span><span style="font-size:49px;line-height:1.1">Built right</span></div>
+          <div class="scale-row"><span>39</span><span style="font-size:39px">Built right</span></div>
+          <div class="scale-row"><span>31</span><span style="font-size:31px">Built right</span></div>
+          <div class="scale-row"><span>25</span><span style="font-size:25px">Built right</span></div>
+          <div class="scale-row"><span>20</span><span style="font-size:20px;font-family:var(--font-body);font-weight:400;letter-spacing:0">Built right, built to last</span></div>
+          <div class="scale-row"><span>16</span><span style="font-size:16px;font-family:var(--font-body);font-weight:400;letter-spacing:0">Built right, built to last</span></div>
+          <div class="scale-row"><span>14</span><span style="font-size:14px;font-family:var(--font-body);font-weight:400;letter-spacing:0">Built right, built to last</span></div>
+          <div class="scale-row"><span>12</span><span style="font-size:12px;font-family:var(--font-mono);font-weight:500;letter-spacing:.08em;text-transform:uppercase">Built right</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHAPE -->
+  <section id="shape">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">05 / shape</p><h2>Every shape comes from the mark.</h2></div>
+        <p class="lede">Four motifs, nothing else. No blobs, waves, sparkles, glass or gradients.</p>
+      </div>
+      <div class="grid g4 motifs">
+        <div class="card motif"><div class="art art-corners"><div></div><div></div></div><div class="txt"><h3>Outer round, inner square</h3><p class="muted" style="font-size:15px">Pairs get <code>24px 0 0 24px</code> and <code>0 24px 24px 0</code>. Solo cards use 16px.</p></div></div>
+        <div class="card motif"><div class="art art-seam"><div></div><div></div><div></div></div><div class="txt"><h3>The seam</h3><p class="muted" style="font-size:15px">A thin gap, not a line. 2 to 8px between joined blocks.</p></div></div>
+        <div class="card motif"><div class="art art-cut"><span class="deg">64°</span></div><div class="txt"><h3>The cut</h3><p class="muted" style="font-size:15px">One diagonal at 64°. Clipped corners, dividers, wipes. One per view.</p></div></div>
+        <div class="card motif"><div class="art art-stem"><i></i><i></i><i></i></div><div class="txt"><h3>The stem</h3><p class="muted" style="font-size:15px">A vertical bar for quotes, callouts, active states, timelines.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UI -->
+  <section id="ui">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">06 / interface</p><h2>Flat, bordered, exact.</h2></div>
+        <p class="lede">Borders before shadows. One blue focal point. These components respond to the theme toggle above.</p>
+      </div>
+      <div class="mini-nav" style="margin-bottom:16px">
+        <img class="logo-light" src="assets/handh-dev-brandmark.svg" alt="handh.dev" style="height:28px"><img class="logo-dark" src="assets/handh-dev-brandmark-reversed.svg" alt="handh.dev" style="height:28px">
+        <ul><li class="active">Work</li><li>Services</li><li>Process</li><li>About</li></ul>
+        <a class="btn btn-primary" href="#ui">Start a project</a>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <p class="eyebrow">// buttons and tags</p>
+          <div class="btn-row"><a class="btn btn-primary" href="#ui">Start a project</a><a class="btn btn-secondary" href="#ui">See the work</a><a href="#ui">Read the docs</a></div>
+          <div class="btn-row" style="margin-top:20px"><span class="tag">design</span><span class="tag">build</span><span class="tag o">v1.0</span><span class="tag o">open source</span></div>
+          <div style="margin-top:24px"><label class="label" for="em">Email</label><input id="em" class="input" style="margin-top:6px" placeholder="you@company.com"></div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:16px">
+          <p class="eyebrow" style="margin:0">// code and callout</p>
+<div class="code"><span class="c">// tokens.css</span>
+<span class="k">:root</span> {
+  --brand-ink:  #1d252f;
+  --brand-blue: #0073fe;
+  --action:     #005fd6;
+}</div>
+          <div class="callout"><strong>Note:</strong> small blue text uses <code>#005fd6</code>, not the logo blue.</div>
+        </div>
+      </div>
+      <div class="grid g3" style="margin-top:16px">
+        <div class="card"><p class="eyebrow">01</p><h3>Plan</h3><p class="muted" style="font-size:15px;margin:0">Scope it, size it, write it down. Placeholder copy.</p></div>
+        <div class="card"><p class="eyebrow">02</p><h3>Design</h3><p class="muted" style="font-size:15px;margin:0">Flows and screens that make the hard parts obvious.</p></div>
+        <div class="card"><p class="eyebrow">03</p><h3>Build</h3><p class="muted" style="font-size:15px;margin:0">Tested, documented, shipped, and handed over clean.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATIONS -->
+  <section id="apply">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">07 / applications</p><h2>How it shows up.</h2></div>
+        <p class="lede">Reference compositions. Copy is placeholder; layouts, colors and motifs are the point.</p>
+      </div>
+      <div class="grid g2x">
+        <div>
+          <div class="og"><img src="assets/handh-dev-brandmark-reversed.svg" alt=""><div class="h">Software, built <span>right</span>.</div><div class="u">handh.dev</div></div>
+          <p class="label" style="margin-top:10px">social / og card · 1200×630</p>
+        </div>
+        <div>
+          <div class="slide"><span class="n">03 / 12</span><div class="e">// section</div><div class="t">How we work</div></div>
+          <p class="label" style="margin-top:10px">slide divider · 16:9</p>
+        </div>
+        <div>
+          <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
+            <div class="bc front"><img src="assets/handh-dev-full-reversed.svg" alt="" style="width:70%"></div>
+            <div class="bc back"><div><div class="nm">[Full name]</div><div class="rl">[Role]</div></div><div class="ln">[email]@handh.dev<br><b>handh.dev</b></div></div>
+          </div>
+          <p class="label" style="margin-top:10px">business card · front and back</p>
+        </div>
+        <div>
+          <div class="card" style="height:calc(100% - 30px);display:flex;align-items:center">
+            <div class="icons">
+              <div class="ic lg"><img src="assets/handh-dev-brandmark.svg" alt=""></div>
+              <div class="ic md"><img src="assets/handh-dev-brandmark-reversed.svg" alt=""></div>
+              <div class="ic sm"><img src="assets/handh-dev-brandmark.svg" alt=""></div>
+              <div class="ic xs"><img src="assets/handh-dev-brandmark.svg" alt=""></div>
+            </div>
+          </div>
+          <p class="label" style="margin-top:10px">app icon · avatar · favicon (16 to 24px)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section id="logo">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">08 / logo</p><h2>Use the files. Don't touch them.</h2></div>
+        <p class="lede">Clear space equals the width of the ink stem on every side. Minimum 24px for the mark in UI, 96px wide for the full lockup. The lockup is stacked, so headers and navs use the brandmark alone.</p>
+      </div>
+      <div class="grid g4">
+        <div><div class="lg-cell" style="background:#fff"><img src="assets/handh-dev-full.svg" alt="Correct: full color on white" style="width:72%"></div><div class="lg-cap"><b class="y">✓</b>Full color on white or ink-50</div></div>
+        <div><div class="lg-cell" style="background:#0b0f14;border-color:#0b0f14"><img src="assets/handh-dev-full-reversed.svg" alt="Correct: reversed on dark" style="width:72%"></div><div class="lg-cap"><b class="y">✓</b>Reversed file on ink-950 / ink-800</div></div>
+        <div><div class="lg-cell" style="background:#0073fe;border-color:#0073fe"><img src="assets/handh-dev-full-mono-white.svg" alt="Correct: mono white on brand blue" style="width:72%"></div><div class="lg-cap"><b class="y">✓</b>Mono white on brand blue</div></div>
+        <div><div class="lg-cell" style="background:#fff"><div class="cleargrid"><img src="assets/handh-dev-brandmark.svg" alt="Clear space diagram" style="width:64px"></div></div><div class="lg-cap"><b class="y">✓</b>Clear space: one stem width</div></div>
+
+        <div><div class="lg-cell" style="background:#fff"><img src="assets/handh-dev-brandmark.svg" alt="Wrong: stretched" style="width:30%;transform:scaleX(1.9)"></div><div class="lg-cap"><b class="n">✕</b>Stretch, squash or skew</div></div>
+        <div><div class="lg-cell" style="background:#fff"><img src="assets/handh-dev-brandmark.svg" alt="Wrong: recolored" style="width:40%;filter:hue-rotate(140deg) saturate(1.6)"></div><div class="lg-cap"><b class="n">✕</b>Recolor or swap colors</div></div>
+        <div><div class="lg-cell" style="background:#fff"><img src="assets/handh-dev-brandmark.svg" alt="Wrong: effects" style="width:40%;transform:rotate(-12deg);filter:drop-shadow(6px 8px 6px rgba(0,0,0,.45))"></div><div class="lg-cap"><b class="n">✕</b>Rotate, shadow, glow, 3D</div></div>
+        <div><div class="lg-cell busy"><img src="assets/handh-dev-full.svg" alt="Wrong: busy background" style="width:72%"></div><div class="lg-cap"><b class="n">✕</b>Busy or mid-tone backgrounds</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE -->
+  <section id="voice">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">09 / voice</p><h2>Say it plainly.</h2></div>
+        <p class="lede">An expert colleague, not a salesperson. Short sentences, active verbs, specifics over adjectives.</p>
+      </div>
+      <div class="say">
+        <div class="hd">Write</div><div class="hd">Not</div>
+        <div>We design and build software.</div><div class="no">We leverage cutting-edge synergies.</div>
+        <div>Shipped in six weeks. Placeholder.</div><div class="no">Lightning-fast, world-class delivery!!!</div>
+        <div>Design and build</div><div class="no">Design + Build, with the symbol</div>
+        <div>handh.dev makes it simple.</div><div class="no">The [name] team is revolutionizing the space.</div>
+        <div>Something broke on our side. Try again in a minute.</div><div class="no">Oops!! 😬 An error occurred.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILES -->
+  <section id="files">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow">10 / for agents</p><h2>Hand over these files.</h2></div>
+        <p class="lede">This page is the picture. The files are the rules.</p>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <ul class="files" style="margin:0;padding-left:18px">
+            <li><code>brand/BRAND.md</code>: full spec, rules and checklist. Read first.</li>
+            <li><code>brand/tokens.json</code>: every value, machine-readable.</li>
+            <li><code>brand/tokens.css</code>: drop-in CSS variables, light and dark.</li>
+            <li><code>brand/assets/</code>: the only approved logo files. <code>*-tight.svg</code> = cropped lockups for headers.</li>
+            <li><code>brand/check-brand-name.py</code>: name and ampersand linter.</li>
+            <li><code>brand/moodboard.html</code>: this page.</li>
+          </ul>
+        </div>
+        <div class="callout" style="display:flex;flex-direction:column;justify-content:center"><strong style="font-family:var(--font-display);font-size:18px">Prompt to give any agent</strong><span style="margin-top:8px">"Read brand/BRAND.md and brand/tokens.json before you start. Follow them exactly. Use logo files from brand/assets only. Run brand/check-brand-name.py on your output and fix anything it flags."</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img class="logo-light" src="assets/handh-dev-full-tight.svg" alt="handh.dev" style="height:80px;width:auto"><img class="logo-dark" src="assets/handh-dev-full-reversed-tight.svg" alt="handh.dev" style="height:80px;width:auto">
+    <span class="mono">handh.dev brand mood board · v1.0</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById('themeBtn');
+    var modes = ['auto', 'light', 'dark'];
+    var i = 0;
+    try { var saved = localStorage.getItem('brand-theme'); if (saved && modes.indexOf(saved) > -1) i = modes.indexOf(saved); } catch (e) {}
+    function apply() {
+      var m = modes[i];
+      if (m === 'auto') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', m);
+      btn.textContent = 'theme: ' + m;
+      try { localStorage.setItem('brand-theme', m); } catch (e) {}
+    }
+    btn.addEventListener('click', function () { i = (i + 1) % modes.length; apply(); });
+    apply();
+  })();
+</script>
+</body>
+</html>

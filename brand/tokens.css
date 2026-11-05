@@ -1,0 +1,90 @@
+/* handh.dev design tokens: drop-in CSS custom properties.
+   Mirrors tokens.json. Light by default; dark via prefers-color-scheme or [data-theme="dark"]. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@500;600;700&display=swap");
+
+:root {
+  /* core */
+  --brand-ink: #1d252f;
+  --brand-blue: #0073fe;
+  --brand-white: #ffffff;
+
+  /* blue scale */
+  --blue-50: #eef5ff; --blue-100: #d9e8ff; --blue-200: #b5d3ff; --blue-300: #82b5ff;
+  --blue-400: #4a93ff; --blue-500: #0073fe; --blue-600: #005fd6; --blue-700: #004cad;
+  --blue-800: #003b87; --blue-900: #002a61; --blue-950: #001a3d;
+
+  /* ink scale */
+  --ink-50: #f6f7f9; --ink-100: #eceef2; --ink-200: #d8dce3; --ink-300: #b6bdc8;
+  --ink-400: #8a94a3; --ink-500: #5f6a7a; --ink-600: #434d5b; --ink-700: #313a46;
+  --ink-800: #1d252f; --ink-900: #141a22; --ink-950: #0b0f14;
+
+  /* status (functional only) */
+  --success: #0f8a5f; --warning: #b25e00; --danger: #d1293d;
+
+  /* semantic: light */
+  --bg: #ffffff;
+  --bg-subtle: #f6f7f9;
+  --surface: #ffffff;
+  --border: #d8dce3;
+  --text: #1d252f;
+  --text-muted: #5f6a7a;
+  --action: #005fd6;        /* button / filled control */
+  --action-hover: #004cad;
+  --link: #005fd6;          /* inline link text */
+  --on-action: #ffffff;
+  --signal: #0073fe;
+  --focus: #0073fe;
+  --code-bg: #eceef2;
+
+  /* type */
+  --font-display: "Lexend", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --text-xs: 12px; --text-sm: 14px; --text-base: 16px; --text-lg: 20px; --text-xl: 25px;
+  --text-2xl: 31px; --text-3xl: 39px; --text-4xl: 49px; --text-5xl: 61px; --text-6xl: 76px;
+  --tracking-display: -0.025em;
+  --tracking-eyebrow: 0.08em;
+
+  /* space (4px grid) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
+  --space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 96px; --space-10: 128px;
+
+  /* radius: outer round, inner square */
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px; --radius-xl: 24px; --radius-pill: 999px;
+
+  /* the signature asymmetric corners (use on cards, panels, hero blocks) */
+  --corner-left:  var(--radius-xl) 0 0 var(--radius-xl);   /* left half of the mark */
+  --corner-right: 0 var(--radius-xl) var(--radius-xl) 0;   /* right half of the mark */
+
+  --angle-cut: 64deg;
+
+  --shadow-sm: 0 1px 2px rgba(11,15,20,0.06), 0 1px 1px rgba(11,15,20,0.04);
+  --shadow-md: 0 8px 24px -8px rgba(11,15,20,0.18);
+  --shadow-focus: 0 0 0 3px rgba(0,115,254,0.35);
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms; --dur-base: 200ms; --dur-slow: 360ms;
+
+  --max-width: 1200px;
+  --max-prose: 68ch;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0f14; --bg-subtle: #141a22; --surface: #141a22; --border: #313a46;
+    --text: #f6f7f9; --text-muted: #8a94a3;
+    --action: #005fd6; --action-hover: #004cad; --on-action: #ffffff; --link: #4a93ff;
+    --signal: #4a93ff; --focus: #4a93ff; --code-bg: #1d252f;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b0f14; --bg-subtle: #141a22; --surface: #141a22; --border: #313a46;
+  --text: #f6f7f9; --text-muted: #8a94a3;
+  --action: #005fd6; --action-hover: #004cad; --on-action: #ffffff; --link: #4a93ff;
+  --signal: #4a93ff; --focus: #4a93ff; --code-bg: #1d252f;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0ms; --dur-base: 0ms; --dur-slow: 0ms; }
+}
