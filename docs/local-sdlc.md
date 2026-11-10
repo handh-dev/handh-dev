@@ -1,6 +1,8 @@
 # Local handh.dev software delivery
 
-Status: implemented and production-qualified on November 5, 2026.
+Status: superseded on November 10, 2026 by [decisions 1 to 3](adr/). This still
+describes how Bubba Website releases work today; it no longer describes how they
+should work. Implemented and production-qualified on November 5, 2026.
 Tracking: https://github.com/handh-dev/handh-infra/issues/99
 
 ## Outcome
