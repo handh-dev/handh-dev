@@ -50,7 +50,7 @@ the principles above were set on november 10, 2026. the system does not match th
 |---|---|---|
 | handh.dev | `handh-dev` | mission, principles, vocabulary, decisions, brand |
 | handh.dev | `handh-infra` | the server, its configuration, and the tooling that runs services |
-| handh.dev | [`email`](https://github.com/handh-dev/email) | hosted email dashboard, provider plan, and operating guidance |
+| handh.dev | [`handh-email`](https://github.com/handh-dev/handh-email) | hosted email dashboard, provider plan, and operating guidance |
 | howeth and harp | `handh-website` | public website and hhq |
 | howeth and harp | `hh-wiki` | private standards wiki |
 | bubbas fireworks | `bubbas-mono` | maintained bubba applications |
@@ -64,7 +64,7 @@ the principles above were set on november 10, 2026. the system does not match th
 | fat man wholesale | `fatman-wholesale` | company website |
 | warecasa | `WareCasa` | inventory and operations for a fireworks business |
 
-archived: `bubbas-info-links`, `bubbas-social`, [`handh-mail`](https://github.com/handh-dev/handh-mail) (guidance consolidated into `email`).
+archived: `bubbas-info-links`, `bubbas-social`, [`handh-mail`](https://github.com/handh-dev/handh-mail) (guidance consolidated into `handh-email`).
 
 ## brand
 
