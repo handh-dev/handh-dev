@@ -51,20 +51,16 @@ the principles above were set on november 10, 2026. the system does not match th
 | handh.dev | `handh-dev` | mission, principles, vocabulary, decisions, brand |
 | handh.dev | `handh-infra` | the server, its configuration, and the tooling that runs services |
 | handh.dev | [`handh-email`](https://github.com/handh-dev/handh-email) | hosted email dashboard, provider plan, and operating guidance |
+| handh.dev | `.github` | organization profile and shared github configuration |
+| handh.dev | `wlkractions-test` | private workhorse runner acceptance checks |
 | howeth and harp | `handh-website` | public website and hhq |
-| howeth and harp | `hh-wiki` | private standards wiki |
-| bubbas fireworks | `bubbas-mono` | maintained bubba applications |
-| bubbas fireworks | `bubbas` | service map and architecture notes |
-| bubbas fireworks | `bubbas-website` | public website |
-| bubbas fireworks | `bubbashq` | operator application |
-| bubbas fireworks | `bubbas-mobile-app` | mobile app |
-| bubbas fireworks | `bubbas-ui` | shared interface components |
-| bubbas fireworks | `bubbas-brand-studio` | brand catalog and assets |
-| bubbas fireworks | `bubbas-arcade` | web arcade |
-| fat man wholesale | `fatman-wholesale` | company website |
+| howeth and harp | `hh-wiki` | private standards hub: wiki deployment, starter pages and operating guidance; live pages at [wiki.howethandharp.com](https://wiki.howethandharp.com) |
+| bubbas fireworks | `bubbas-mono` | website and bulk ordering, hq, mobile app, brand studio, info links, shared ui, hours and creative tools |
+| bubbas fireworks | `bubbas-arcade` | web arcade, including redcoat rampage and tribal |
+| fat man wholesale | `fatman-wholesale` | wholesale website, customer accounts and owner order desk |
 | warecasa | `WareCasa` | inventory and operations for a fireworks business |
 
-archived: `bubbas-info-links`, `bubbas-social`, [`handh-mail`](https://github.com/handh-dev/handh-mail) (guidance consolidated into `handh-email`).
+archived: [`handh-mail`](https://github.com/handh-dev/handh-mail) (guidance consolidated into `handh-email`), [`strobe-arcade`](https://github.com/handh-dev/strobe-arcade) (performance comparison tool).
 
 ## brand
 
