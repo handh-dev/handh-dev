@@ -88,3 +88,51 @@
 @media (prefers-reduced-motion: reduce) {
   :root { --dur-fast: 0ms; --dur-base: 0ms; --dur-slow: 0ms; }
 }
+
+/* Dense app UI */
+:root {
+  --dense-canvas: #ffffff;
+  --dense-panel: #f8f9fa;
+  --dense-hover: #f1f3f5;
+  --dense-active: #e9ecf0;
+  --dense-border: #e6e8ec;
+  --dense-foreground: #1d252f;
+  --dense-muted: #626d7c;
+  --dense-ok: #0f8a5f;
+  --dense-warn: #b25e00;
+  --dense-bad: #d1293d;
+  --dense-idle: #9aa3b0;
+  --dense-type: 13px;
+  --dense-label: 10.5px;
+  --dense-metric: 18px;
+  --dense-mono: 11px;
+  --dense-row: 32px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+  --dense-canvas: #0b0f14;
+  --dense-panel: #10151c;
+  --dense-hover: #161c25;
+  --dense-active: #1c2430;
+  --dense-border: #232831;
+  --dense-foreground: #eef1f5;
+  --dense-muted: #8a94a3;
+  --dense-ok: #2fbf86;
+  --dense-warn: #e39b3a;
+  --dense-bad: #f0556a;
+  --dense-idle: #5f6a7a;
+}
+}
+:root[data-theme="dark"] {
+  --dense-canvas: #0b0f14;
+  --dense-panel: #10151c;
+  --dense-hover: #161c25;
+  --dense-active: #1c2430;
+  --dense-border: #232831;
+  --dense-foreground: #eef1f5;
+  --dense-muted: #8a94a3;
+  --dense-ok: #2fbf86;
+  --dense-warn: #e39b3a;
+  --dense-bad: #f0556a;
+  --dense-idle: #5f6a7a;
+}

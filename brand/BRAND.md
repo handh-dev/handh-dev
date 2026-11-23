@@ -287,3 +287,7 @@ Mechanics: sentence case; Oxford comma; numerals for 10 and above; no ampersand;
 - [ ] No gradients, glows, glass, blobs, stock handshakes or emoji.
 - [ ] No invented facts (clients, numbers, testimonials).
 - [ ] Works in light and dark, passes WCAG AA.
+
+## Dense app UI
+
+Use the dense canvas, panel, hover, active and border tokens for administration consoles. Inter body text is 13px, uppercase labels are 10.5px, metrics are 18px and JetBrains Mono identifiers are 11px. Standard rows are 32px. Separate sections with 1px borders. Use 6px status dots with text labels and use the action blue for the primary control. Map the dense tokens to application theme variables and honor light and dark appearance.
